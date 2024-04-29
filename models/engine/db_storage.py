@@ -78,28 +78,24 @@ class DBStorage:
 
     def get(self, cls, id):
         """Retrieve an object based on its class and ID."""
-        # Check if the class is valid
-        if cls not in classes.values():
+        if cls and id:
+            if cls in classes.values():
+                all_obj = self.all(cls)
+                
+                for value in all_obj.values():
+                    if value.id == id:
+                        return value
             return None
-
-        # Query the database for the object
-        try:
-            obj = self.__session.query(cls).filter(cls.id == id).one()
-        except sqlalchemy.orm.exc.NoResultFound:
-            # If no object is found, return None
-            return None
-
-        return obj
+        return None
     
     def count(self, cls=None):
         """Count the number of objects in storage matching the given class.
         If no class is passed, returns the count of all objects in storage.
         """
         if cls is None:
-            # Count all objects in storage
-            count = self.__session.query(func.count('*')).scalar()
+            all_cls = self.all()
+            return len(all_cls)
         else:
-            # Count objects of a specific class
-            count = self.__session.query(func.count(cls.id)).scalar()
-
-        return count
+            all_select_cls = self.all(cls)
+            return len(all_select_cls)
+        return None

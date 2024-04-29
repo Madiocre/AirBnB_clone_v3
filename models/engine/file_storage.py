@@ -73,6 +73,22 @@ class FileStorage:
         """Retrieve an object based on its class and ID."""
         if cls and id:
             if cls in classes.values():
+                all_obj = self.all(cls)
                 
-        else:
+                for value in all_obj.values():
+                    if value.id == id:
+                        return value
             return None
+        return None
+    
+    def count(self, cls=None):
+        """Count the number of objects in storage matching the given class.
+        If no class is passed, returns the count of all objects in storage.
+        """
+        if cls is None:
+            all_cls = self.all()
+            return len(all_cls)
+        else:
+            all_select_cls = self.all(cls)
+            return len(all_select_cls)
+        return None

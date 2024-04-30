@@ -95,7 +95,8 @@ class DBStorage:
         if cls is None:
             all_cls = self.all()
             return len(all_cls)
-        else:
-            all_select_cls = self.all(cls)
-            return len(all_select_cls)
+        for clas,value in classes.items():
+            if cls in classes.values():
+                all_select_cls = self.all(cls)
+                return len(all_select_cls)
         return None

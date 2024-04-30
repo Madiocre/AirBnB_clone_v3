@@ -20,11 +20,16 @@ def api_status():
 
 
 @app_views.route("/stats")
-def something():
+def get_stats():
     """ JSON """
-    data = {'states': State, 'users': User,
-            'amenities': Amenity, 'cities': City,
-            'places': Place, 'reviews': Review}
+    data = {'states': State, 
+            'users': User,
+            'amenities': Amenity,
+            'cities': City,
+            'places': Place,
+            'reviews': Review
+            }
+    
     for item in data:
         data[item] = storage.count(data[item])
     return jsonify(data)

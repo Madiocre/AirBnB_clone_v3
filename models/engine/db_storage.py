@@ -96,7 +96,7 @@ class DBStorage:
             all_cls = self.all()
             return len(all_cls)
         for clas,value in classes.items():
-            if cls in classes.values():
+            if cls == clas or cls == value:
                 all_select_cls = self.all(cls)
                 return len(all_select_cls)
         return None

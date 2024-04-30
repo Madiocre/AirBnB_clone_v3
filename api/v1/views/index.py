@@ -11,5 +11,5 @@ def api_status():
     """
     
     """
-    resp = ("status": "OK")
-    return resp
+    resp = {'status': "OK"}
+    return jsonify(resp)

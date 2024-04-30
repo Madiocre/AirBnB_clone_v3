@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Create a Flask web application
+Create a Flask blueprint
 """
 
 from flask import Blueprint

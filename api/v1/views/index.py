@@ -8,6 +8,7 @@ from models import storage
 from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
+app.url_map.strict_slashes = False
 
 
 @app_views.route("/status")

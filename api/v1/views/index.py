@@ -3,7 +3,7 @@
 starts a Flask web application
 """
 
-import models
+import models.engine.db_storage import classes
 from models import storage
 from models.base_model import BaseModel
 from flask import Flask, jsonify
@@ -22,11 +22,7 @@ def api_status():
 @app_views.route("/stats")
 def get_stats():
     """ JSON """
-    data = {'amenities': storage.count('Amenity'),
-            'cities': storage.count('City'),
-            'places': storage.count('Place'),
-            'reviews': storage.count('Review'),
-            'states': storage.count('State'),
-            'users': storage.count('User')
-            }
-    return jsonify(data)
+    c = classes
+    for x in c:
+        c[x] = storage.count(c[x])
+    return jsonify(c)

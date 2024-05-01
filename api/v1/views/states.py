@@ -3,16 +3,14 @@
 Init.
 """
 
-from flask import Flask, jsonify, abort, request
+from flask import jsonify, abort, request
 from api.v1.views import app_views
 from models import storage
 from models.state import State
 
-app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app_views.route("/states", methods=['GET'])
+@app_views.route("/states", methods=['GET'], strict_slashes=False)
 def states():
     """States endpoint."""
     states = storage.all('State')
@@ -22,7 +20,7 @@ def states():
     return jsonify(listed)
 
 
-@app_views.route('/states/<state>', methods=['GET'])
+@app_views.route('/states/<state>', methods=['GET'], strict_slashes=False)
 def statebyid(state):
     """States endpoint."""
     state = storage.get('State', state)
@@ -31,7 +29,7 @@ def statebyid(state):
     return jsonify(state.to_dict(), 200)
 
 
-@app_views.route('/states/', methods=['POST'])
+@app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def setstate():
     """States endpoint."""
     if not request.json:
@@ -44,7 +42,7 @@ def setstate():
     return jsonify(toset.to_dict()), '201'
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'])
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def upstate(state_id):
     """States endpoint."""
     if not request.json:
@@ -60,7 +58,7 @@ def upstate(state_id):
     return jsonify(toupdate.to_dict()), '200'
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'])
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def deleting(state_id):
     """States endpoint."""
     todelete = storage.get(State, state_id)

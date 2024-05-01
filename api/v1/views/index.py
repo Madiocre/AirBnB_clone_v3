@@ -22,9 +22,11 @@ def api_status():
 @app_views.route("/stats")
 def get_stats():
     """ JSON """
-    data = {'states': State, 'users': User,
-            'amenities': Amenity, 'cities': City,
-            'places': Place, 'reviews': Review}
-    for key in data:
-        data[key] = storage.count(data[key])
+    data = {'amenities': storage.count('Amenity'),
+            'cities': storage.count('City'),
+            'places': storage.count('Place'),
+            'reviews': storage.count('Review'),
+            'states': storage.count('State'),
+            'users': storage.count('User')
+            }
     return jsonify(data)

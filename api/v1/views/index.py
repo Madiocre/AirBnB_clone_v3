@@ -18,9 +18,8 @@ def api_status():
 
 
 @app_views.route("/stats", strict_slashes=False)
-def stats():
+def get_stats():
     """ JSON """
-    c = classe
-    for clas in c:
-        c[clas] = storage.count(c[clas])
-    return jsonify(c)
+    for clas in classe:
+        classe[clas] = storage.count(classe[clas])
+    return jsonify(classe)

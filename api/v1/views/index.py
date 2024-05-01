@@ -7,6 +7,7 @@ from models import storage
 from models.base_model import BaseModel
 from flask import jsonify
 from api.v1.views import app_views
+from models.engine.db_storage import classe
 
 
 
@@ -19,8 +20,6 @@ def api_status():
 @app_views.route("/stats", strict_slashes=False)
 def get_stats():
     """ JSON """
-    classes = {"amenity": Amenity, "city": City,
-          "place": Place, "review": Review, "state": State, "user": User}
-    for clas in classes:
-        classes[clas] = storage.count(classes[clas])
-    return jsonify(classes)
+    for clas in classe:
+        classe[clas] = storage.count(classe[clas])
+    return jsonify(classe)

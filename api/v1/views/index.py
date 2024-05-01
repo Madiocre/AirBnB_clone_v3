@@ -10,7 +10,6 @@ from api.v1.views import app_views
 from models.engine.db_storage import classe
 
 
-
 @app_views.route("/status", strict_slashes=False)
 def api_status():
     """  Returns JSON'd Text  """

@@ -15,6 +15,7 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app)
 
+
 @app.teardown_appcontext
 def downtear(self):
     '''Status of your API'''

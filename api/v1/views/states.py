@@ -9,7 +9,6 @@ from models import storage
 from models.state import State
 
 
-
 @app_views.route("/states", methods=['GET'], strict_slashes=False)
 def states():
     """States endpoint."""
@@ -58,7 +57,8 @@ def upstate(state_id):
     return jsonify(toupdate.to_dict()), '200'
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def deleting(state_id):
     """States endpoint."""
     todelete = storage.get(State, state_id)
